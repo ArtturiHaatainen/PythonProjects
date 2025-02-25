@@ -23,7 +23,7 @@ def on_progress(stream, chunk, bytes_remaining):
     dl_progressbarp.configure(text=f"{round(percentage)}%")
     dl_progressbarp.update()
 
-    dl_progressbar.set(percentage)
+    dl_progressbar.set(percentage / 100)
     dl_progressbar.update()
 # Settings
 customtkinter.set_appearance_mode("System")
