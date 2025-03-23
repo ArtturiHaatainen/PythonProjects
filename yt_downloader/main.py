@@ -1,6 +1,7 @@
 import tkinter
 import customtkinter
 from pytubefix import YouTube
+from pathlib import Path
 
 def start_download():
     try:
@@ -10,7 +11,8 @@ def start_download():
 
         title.configure(text=yt_object.title)
         dl_finished.configure(text="")
-        video.download(output_path="C:/Users/Artturi/Downloads")
+        dl_folder = Path.home() / "Downloads"
+        video.download(dl_folder)
         dl_finished.configure(text="Download finished!")
     except Exception as e:
         dl_finished.configure(text="YouTube link may not be valid or there is a problem with the internet connection", text_color="red")
