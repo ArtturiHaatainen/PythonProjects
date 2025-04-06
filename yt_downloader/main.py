@@ -11,7 +11,7 @@ def start_download():
 
         title.configure(text=yt_object.title)
         dl_finished.configure(text="")
-        dl_folder = Path.home() / "Downloads"
+        #dl_folder = Path.home() / "Downloads"
         video.download(dl_folder)
         dl_finished.configure(text="Download finished!")
     except Exception as e:
@@ -27,6 +27,15 @@ def on_progress(stream, chunk, bytes_remaining):
 
     dl_progressbar.set(percentage / 100)
     dl_progressbar.update()
+
+
+def choose_location():
+    global dl_folder
+    dl_folder = tkinter.filedialog.askdirectory()
+    if dl_folder:
+        dl_finished.configure(text=f"Download location set to: {dl_folder}", text_color="green")
+    else:
+        dl_finished.configure(text="No folder selected", text_color="red")
 # Settings
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
@@ -44,8 +53,14 @@ url_var = tkinter.StringVar()
 link = customtkinter.CTkEntry(app, width=400, height=50, font=("Arial", 15), textvariable = url_var)
 link.pack(padx=20, pady=20)
 
-dl_button = customtkinter.CTkButton(app, text="Download", font=("Arial", 15), command=start_download)
-dl_button.pack(padx=20, pady=20)
+button_frame = customtkinter.CTkFrame(app, fg_color="transparent")
+button_frame.pack(pady=20)
+
+dl_button = customtkinter.CTkButton(button_frame, text="Download", font=("Arial", 15), command=start_download)
+dl_button.pack(side="left", padx=10)
+
+dl_location = customtkinter.CTkButton(button_frame, text="Choose download location", font=("Arial", 15), command=choose_location)
+dl_location.pack(side="left", padx=10)
 
 dl_progressbar = customtkinter.CTkProgressBar(app, width=400)
 dl_progressbar.set(0)
@@ -56,5 +71,8 @@ dl_progressbarp.pack(padx=20, pady=20)
 
 dl_finished = customtkinter.CTkLabel(app, text="", font=("Arial", 15))
 dl_finished.pack(padx=20, pady=20)
+
+
+
 # Run app
 app.mainloop()

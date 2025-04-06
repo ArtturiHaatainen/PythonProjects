@@ -19,7 +19,7 @@ This was also my first time using VSCode Copilot while coding and it made those 
 
 ### Possible adjustments
 
-1. Make the download location choosable from the GUI.
+1. Make the download location choosable from the GUI. :heavy_check_mark:
 2. Audio only?
 3. Possible to choose quality of video to save space and possibility to choose the file name before downloading.
 4. Download whole playlists by once and error handling to those.
